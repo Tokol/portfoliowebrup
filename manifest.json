@@ -1,0 +1,35 @@
+{
+    "name": "RupaLamaPortfolio",
+    "short_name": "RupaLama",
+    "start_url": ".",
+    "display": "standalone",
+    "background_color": "#001F3F",
+    "theme_color": "#001F3F",
+    "description": "Portfolio of Rupa Lama, a skilled banking professional with over 6 years of experience in finance, cheque clearing, reconciliation, and customer service in Kathmandu, Nepal.",
+    "orientation": "portrait-primary",
+    "prefer_related_applications": false,
+    "icons": [
+        {
+            "src": "icons/Icon-192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "icons/Icon-512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        },
+        {
+            "src": "icons/Icon-maskable-192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "maskable"
+        },
+        {
+            "src": "icons/Icon-maskable-512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "maskable"
+        }
+    ]
+}
