@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
         ),
       ),
       debugShowCheckedModeBanner: false,
-      home: Scaffold(body: Center(child: Text('Coming soon', style: TextStyle(fontSize: 100.0, fontWeight: FontWeight.bold),),))
+      home: Scaffold(body: Center(child: Text('Coming soon, stay tuned!', style: TextStyle(fontSize: 40.0, fontWeight: FontWeight.bold),),))
     );
   }
 }
