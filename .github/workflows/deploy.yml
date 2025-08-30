@@ -3,33 +3,30 @@ name: Deploy Flutter Web to GitHub Pages
 on:
   push:
     branches:
-      - main   # 👈 triggers deploy when pushing to main
+      - main
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      # Checkout repo
       - name: Checkout source
         uses: actions/checkout@v3
 
-      # Setup Flutter
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.35.1'   # 👈 match your Flutter SDK version
+          flutter-version: '3.35.1'
 
-      # Build Flutter Web
       - name: Build web
         run: flutter build web --release
 
-      # Deploy to GitHub Pages (docs folder on main)
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
+      - name: Deploy to /docs
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./build/web
-          publish_branch: main          # 👈 keep deploying to main
-          destination_dir: docs         # 👈 built files go to /docs
-          cname: rupalama.com.np        # 👈 auto add custom domain
+          branch: main             # ✅ still main
+          folder: build/web        # ✅ source of built files
+          target-folder: docs      # ✅ goes into /docs
+          clean: true
+          token: ${{ secrets.GITHUB_TOKEN }}
+          cname: rupalama.com.np
