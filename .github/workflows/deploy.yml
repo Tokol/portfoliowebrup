@@ -3,31 +3,43 @@ name: Deploy Flutter Web to GitHub Pages
 on:
   push:
     branches:
-      - main
+      - main   # 👈 triggers deploy on pushes to main
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
+      # Checkout repo
       - name: Checkout source
         uses: actions/checkout@v3
 
+      # Setup Flutter
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
           flutter-version: '3.35.1'
 
+      # Cache Flutter dependencies
+      - name: Cache Flutter packages
+        uses: actions/cache@v3
+        with:
+          path: ${{ env.PUB_CACHE }}
+          key: ${{ runner.os }}-pub-${{ hashFiles('**/pubspec.lock') }}
+          restore-keys: ${{ runner.os }}-pub-
+
+      # Build Flutter Web
       - name: Build web
         run: flutter build web --release
 
+      # Deploy to /docs
       - name: Deploy to /docs
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          branch: main             # ✅ still main
-          folder: build/web        # ✅ source of built files
-          target-folder: docs      # ✅ goes into /docs
+          branch: main             # deploy stays on main
+          folder: build/web        # built Flutter web output
+          target-folder: docs      # goes inside /docs
           clean: true
           token: ${{ secrets.GITHUB_TOKEN }}
-          cname: rupalama.com.np
-          nojekyll: true
+          cname: rupalama.com.np   # custom domain
+          nojekyll: true           # disables Jekyll
