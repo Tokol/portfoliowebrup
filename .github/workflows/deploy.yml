@@ -30,3 +30,4 @@ jobs:
           clean: true
           token: ${{ secrets.GITHUB_TOKEN }}
           cname: rupalama.com.np
+          nojekyll: true
