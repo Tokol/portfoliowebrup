@@ -3,7 +3,7 @@ name: Deploy Flutter Web to GitHub Pages
 on:
   push:
     branches:
-      - main   # 👈 change if your default branch is different
+      - main   # 👈 triggers deploy when pushing to main
 
 jobs:
   build:
@@ -24,10 +24,12 @@ jobs:
       - name: Build web
         run: flutter build web --release
 
-      # Deploy to GitHub Pages
+      # Deploy to GitHub Pages (main branch)
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./build/web
-          publish_branch: gh-pages   # 👈 deployment branch
+          publish_branch: main         # 👈 deploy directly to main
+          force_orphan: true           # 👈 cleans old history (needed when publishing to same branch)
+          cname: rupalama.com.np       # 👈 custom domain auto added
