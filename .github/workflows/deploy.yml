@@ -24,12 +24,12 @@ jobs:
       - name: Build web
         run: flutter build web --release
 
-      # Deploy to GitHub Pages (main branch)
+      # Deploy to GitHub Pages (docs folder on main)
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./build/web
-          publish_branch: main         # 👈 deploy directly to main
-          force_orphan: true           # 👈 cleans old history (needed when publishing to same branch)
-          cname: rupalama.com.np       # 👈 custom domain auto added
+          publish_branch: main          # 👈 keep deploying to main
+          destination_dir: docs         # 👈 built files go to /docs
+          cname: rupalama.com.np        # 👈 auto add custom domain
